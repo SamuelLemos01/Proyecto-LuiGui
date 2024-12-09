@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda LuiGui</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    {% block style %} {% endblock %}
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- Fuentes de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Animaciones -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<body id="body-top">
+    <!-- Menu -->
+    <header>
+        <a href="{% url 'inicio' %}"><img src="{% static 'images/logo.png' %}" class="logo"></a>
+
+        <ul class="items-navbar">
+
+            <a href="{% url 'inicio' %}"><img src="{% static 'images/logo.png' %}" class="logo-responsive"></a>
+            <div class="cerrar-icono"><i class="ri-close-line"></i></div>
+
+            <li><a href="#">Catalogo</a></li>
+            <li><a href="{% url 'galeria' %}">Galeria</a></li>
+            <li><a href="#">Historial</a></li>
+            <li><a href="#"><i class="ri-search-line"></i></a></li>
+        </ul>
+
+        <div class="nav-iconos">
+            <button id="form_open"><i class="ri-user-line"></i></button> 
+            <a href="#"><i class="ri-logout-box-line"></i></a>
+            <a href="#"><i class="ri-shopping-cart-line"></i></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+
+    <!-- Login -->
+
+    <section class="home">
+        <div class="form_container">
+            <i class="ri-close-line form_close"></i>
+            <!-- Formulario Login -->
+            <div class="form login_form">
+                <form action="#">
+                    <h2>Iniciar Sesión</h2>
+                    <div class="input_box">
+                        <input type="email" placeholder="Tu correo aqui..." required>
+                        <i class="ri-mail-line email"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Tu contraseña aqui..." required>
+                        <i class="ri-lock-2-line contraseña"></i>
+                        <i class="ri-eye-off-line ojo"></i>
+                    </div>
+
+                    <div class="option_field">
+                        <span class="checkbox">
+                            <input type="checkbox" id="check">
+                            <label for="check">Recordarme</label>
+                        </span>
+                        <a href="#" class="forgot_pw">Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <div class="btn-login"">
+                        <button class="button">Iniciar Ahora</button>
+                    </div>
+
+                    <div class="login_signup">
+                        Todavia no tienes una cuenta? <a href="#" id="login">Creala aqui</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario Registro -->
+            <div class="form signup_form">
+                <form action="#">
+                    <h2>Registrate</h2>
+                    <div class="input_box">
+                        <input type="text" placeholder="Tu nombre aqui..." required>
+                        <i class="ri-map-pin-user-line usuario"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="email" placeholder="Tu correo aqui..." required>
+                        <i class="ri-mail-line email"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="number" placeholder="Tu teléfono aqui..." required>
+                        <i class="ri-phone-line telefono"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Crea una contraseña aqui..." required>
+                        <i class="ri-lock-2-line contraseña"></i>
+                        <i class="ri-eye-off-line ojo"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Confirma tu contraseña..." required>
+                        <i class="ri-lock-2-line contraseña"></i>
+                        <i class="ri-eye-off-line ojo"></i>
+                    </div>
+
+                    <div class="btn-login"">
+                        <button class="button">Registrarse Ahora</button>
+                    </div>
+
+                    <div class="login_signup">
+                        Ya tienes una cuenta? <a href="#" id="signup">Inicia aqui</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+
+    {% block content %}
+    <main>
+
+        
+    </main>
+    {% endblock %}
+    <footer class="pie">
+        <div class="pie-contenido">
+            <img src="{% static 'images/logo.png' %}" alt="">
+            <p>&copy;Copyright The Towers Development 2025</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 100,
+        duration: 1450,
+    });
+</script>
+    {% block script %} {% endblock %}
+</body>
+</html>

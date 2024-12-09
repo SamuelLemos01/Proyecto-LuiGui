@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+    
+    {% block style %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+
+    {% block content %}
+    <!-- Bienvenida -->
+    <section class="inicio">
+        <div class="inicio-text" data-aos="fade-up">
+            <h6>Tienda familiar</h6>
+            <h1>Bienvenidos a la<br> Tienda LuiGui </h1>
+            <p>Aqui encontraras los mejores precios y productos de la canasta familiar</p>
+            <a href="#valores" class="btn">
+                Dezliza
+                <i class="ri-arrow-down-line"></i>
+            </a>
+        </div>
+        <div class="video-container">
+            <div class="video-fondo">
+            </div>
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/2VV9Gq2bRhQ?si=ca3QkDaSyE52tf_O"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mision y Vision -->
+    <section class="valores" id="valores">
+        <h2>Nuestros valores</h2>
+        <div class="mision">
+            <div>
+                <h3 class="texto-m">Misión</h3>
+                <hr>
+                <p class="texto-m">Somos la Tienda LuiGui, un negocio familiar del Pital que sirve a nuestra comunidad
+                    con los productos básicos del día a día. Nos destacamos por nuestra atención amable, precios justos
+                    y por ser un punto de encuentro donde nuestros vecinos pueden encontrar lo que necesitan cerca de
+                    casa.</p>
+            </div>
+            <img src="{% static 'images/Mision.jpeg' %}" alt="" data-aos="zoom-in">
+        </div>
+        <div class="vision">
+            <img src="{% static 'images/Vision.jpeg' %}" alt="" data-aos="zoom-in">
+            <div>
+                <h3 class="texto-m">Visión</h3>
+                <hr>
+                <p class="texto-m">Para el 2025, queremos fortalecer nuestro servicio en el municipio de El Pital
+                    modernizando la forma en que atendemos a nuestros clientes implementando una página web que nos
+                    permita mostrar nuestros productos y mejorar el control de nuestro inventario, sin perder la
+                    amabilidad y el trato personal que nos caracteriza como tienda.</p>
+            </div>
+        </div>
+        <a class="bajar" href="#mapa"><i class="ri-arrow-down-line"></i></a>
+    </section>
+
+    <!-- Ubicacion -->
+    <section class="info" id="mapa">
+        <h2>Ubicación</h2>
+        <div class="info-mapa" data-aos="zoom-in">
+            <div class="mapa">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.691257463369!2d-75.80445673467105!3d2.2685990537118776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2528d5c855151f%3A0x59b0b11c0db5dec4!2sCl.%209%20%235%2C%20Pital%2C%20Huila!5e0!3m2!1ses-419!2sco!4v1732981472360!5m2!1ses-419!2sco"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="info-text">
+                <h2>Detalles</h2>
+                <p>Hace mas de 9 años, la señora Monica Parra tiene ubicada su tienda, en la calle 9 #5-71 en el barrio la Esperanza del
+                    municipio de El Pital. La tienda LuiGui tiene servicio a partir de las 6:30 de la mañana hasta las 9
+                    de la noche, esto de lunes a domingo siempre con la intencion de ofrecer los mejores
+                    productos a su comunidad.
+                </p>
+                <a href="#contactanos" class="mas-info">Contáctenos
+                    <i class="ri-arrow-down-line"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contactenos -->
+
+    <section class="contenedor-contacto" id="contactanos" data-aos="fade-up">
+        <h2>Contactanos</h2>
+        <div class="contacto">
+            <div class="contact-info">
+                <h3 class="titulo-con">Habla con nosotros</h3>
+                <p class="text">
+                    Completa los siguientes datos del formulario y luego envialo para darle una solucion a tu inquietud,
+                    queja o reclamos. En este apartado, leeremos lo que como cliente nos quieres decir.
+                </p>
+
+                <div>
+                    <div class="information">
+                        <i class="ri-map-2-line"></i>
+                        <p>calle 9 #5-71, El pital, Huila</p>
+                    </div>
+                    <div class="information">
+                        <i class="ri-phone-fill"></i>
+                        <p>TiendaLuigui@gmail.com</p>
+                    </div>
+                    <div class="information">
+                        <i class="ri-mail-line"></i>
+                        <p>+57 3125975274</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="" class="datos" autocomplete="off">
+                    <h3 class="titulo-con">Datos basicos</h3>
+                    <div class="input-contenedor-contacto">
+                        <input type="text" name="name" class="input" />
+                        <label for="">Nombre</label>
+                        <span>Tu nombre:</span>
+                    </div>
+                    <div class="input-contenedor-contacto">
+                        <input type="email" name="email" class="input" />
+                        <label for="">Correo</label>
+                        <span>Tu correo:</span>
+                    </div>
+                    <div class="input-contenedor-contacto">
+                        <input type="tel" name="phone" class="input" />
+                        <label for="">Teléfono</label>
+                        <span>Tu telefono:</span>
+                    </div>
+                    <div class="input-contenedor-contacto textarea">
+                        <textarea name="message" class="input"></textarea>
+                        <label for="">Mensaje</label>
+                        <span>Deja tu mensaje</span>
+                    </div>
+                    <input type="submit" value="Enviar comentario" class="boton-contacto" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
