@@ -255,15 +255,11 @@ header {
     transition: all 0.3s ease;
 }
 
-.input_box input:focus~i {
-    transform: scale(1.1);
-    color: #1abc9c;
-}
-
 .input_box i.email,
 .input_box i.contraseña,
 .input_box i.usuario,
-.input_box i.telefono {
+.input_box i.telefono,
+.input_box i.direccion {
     left: 0;
 }
 
@@ -275,7 +271,8 @@ header {
 .input_box input:focus~i.email,
 .input_box input:focus~i.contraseña,
 .input_box input:focus~i.usuario,
-.input_box input:focus~i.telefono {
+.input_box input:focus~i.telefono,
+.input_box input:focus~i.direccion {
     color: green;
 }
 

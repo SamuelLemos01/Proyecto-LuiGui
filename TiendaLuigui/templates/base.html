@@ -37,90 +37,12 @@
         </ul>
 
         <div class="nav-iconos">
-            <button id="form_open"><i class="ri-user-line"></i></button> 
+            <a href="{% url 'login' %}"><i class="ri-user-line"></i></a>
             <a href="#"><i class="ri-logout-box-line"></i></a>
             <a href="#"><i class="ri-shopping-cart-line"></i></a>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
-
-    <!-- Login -->
-
-    <section class="home">
-        <div class="form_container">
-            <i class="ri-close-line form_close"></i>
-            <!-- Formulario Login -->
-            <div class="form login_form">
-                <form action="#">
-                    <h2>Iniciar Sesión</h2>
-                    <div class="input_box">
-                        <input type="email" placeholder="Tu correo aqui..." required>
-                        <i class="ri-mail-line email"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="password" placeholder="Tu contraseña aqui..." required>
-                        <i class="ri-lock-2-line contraseña"></i>
-                        <i class="ri-eye-off-line ojo"></i>
-                    </div>
-
-                    <div class="option_field">
-                        <span class="checkbox">
-                            <input type="checkbox" id="check">
-                            <label for="check">Recordarme</label>
-                        </span>
-                        <a href="#" class="forgot_pw">Olvidaste tu contraseña?</a>
-                    </div>
-
-                    <div class="btn-login"">
-                        <button class="button">Iniciar Ahora</button>
-                    </div>
-
-                    <div class="login_signup">
-                        Todavia no tienes una cuenta? <a href="#" id="login">Creala aqui</a>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Formulario Registro -->
-            <div class="form signup_form">
-                <form action="#">
-                    <h2>Registrate</h2>
-                    <div class="input_box">
-                        <input type="text" placeholder="Tu nombre aqui..." required>
-                        <i class="ri-map-pin-user-line usuario"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="email" placeholder="Tu correo aqui..." required>
-                        <i class="ri-mail-line email"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="number" placeholder="Tu teléfono aqui..." required>
-                        <i class="ri-phone-line telefono"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="password" placeholder="Crea una contraseña aqui..." required>
-                        <i class="ri-lock-2-line contraseña"></i>
-                        <i class="ri-eye-off-line ojo"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="password" placeholder="Confirma tu contraseña..." required>
-                        <i class="ri-lock-2-line contraseña"></i>
-                        <i class="ri-eye-off-line ojo"></i>
-                    </div>
-
-                    <div class="btn-login"">
-                        <button class="button">Registrarse Ahora</button>
-                    </div>
-
-                    <div class="login_signup">
-                        Ya tienes una cuenta? <a href="#" id="signup">Inicia aqui</a>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </section>
-
 
     {% block content %}
     <main>
