@@ -489,7 +489,7 @@ textarea.input {
 @media(max-width: 1000px) {
     .inicio {
         flex-direction: column;
-        height: 110vh;
+        height: 130vh;
         gap: 50px;
         padding: 80px 0px;
     }
@@ -515,7 +515,7 @@ textarea.input {
         text-align: center;
     }
     .video-container {
-        height: 90%;
+        height: 100%;
         width: 70%;
         margin: 0;
     }

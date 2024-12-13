@@ -18,6 +18,7 @@
         rel="stylesheet">
     <!-- Animaciones -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    {% csrf_token %}
 </head>
 
 <body id="body-top">
@@ -30,10 +31,10 @@
             <a href="{% url 'inicio' %}"><img src="{% static 'images/logo.png' %}" class="logo-responsive"></a>
             <div class="cerrar-icono"><i class="ri-close-line"></i></div>
 
-            <li><a href="#">Catalogo</a></li>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li><a href="{% url 'catalogo' %}">Catalogo</a></li>
             <li><a href="{% url 'galeria' %}">Galeria</a></li>
             <li><a href="#">Historial</a></li>
-            <li><a href="#"><i class="ri-search-line"></i></a></li>
         </ul>
 
         <div class="nav-iconos">

@@ -11,6 +11,9 @@ def galeria(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
+def catalogo(request):
+    return render(request, 'catalogo.html')
+
 
 
 from django.shortcuts import render, redirect
@@ -24,15 +27,15 @@ def register(request): #manejara los unuevos registro
         form = CustomUserCreationForm(request.POST)
         if form.is_valid(): #valida los datos ingresados
             user = form.save() #guarda el usuario
-            auth_login(request, user) #inicia sesion automaticamente
+            #auth_login(request, user) #inicia sesion automaticamente
             messages.success(request, "Registro exitoso") #mensaje de exito
-            return redirect('login') #si todo sale bien, devuelvame al login 
+            return redirect('dashboard') #si todo sale bien, devuelvame al login 
         else:
             messages.error(request, "Por favor corrije los siguientes errores:") #mensaje de error si salio mal
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field}: {error}") #las ultimas tres lineas especificaran todos los errores que encontro la funcion segun los parametros ue tiene la autenticacion de django que importe antes, devuelvame al login al apartado de registro
-    return render(request, 'login.html', {'register_mode': True})
+    return render(request, 'dashboard.html', {'register_mode': True})
 
 def login(request): #maneja inicio de sesion 
     if request.method == "POST":
@@ -44,7 +47,7 @@ def login(request): #maneja inicio de sesion
             if user is not None:
                 auth_login(request, user)
                 messages.success(request, f"Bienvenido {username}") #mensaje de bienvenida
-                return redirect('login')
+                return redirect('dashboard')
         else:
             messages.error(request, "Por favor registrate, no te encontramos en la base de datos")  #mensaje de inicio de ssesio fallido
     return render(request, 'login.html', {'register_mode': False}) 
