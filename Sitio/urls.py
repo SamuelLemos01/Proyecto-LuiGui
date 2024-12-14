@@ -23,8 +23,9 @@ urlpatterns = [
     path('galeria/',views.galeria,name='galeria'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('perfil/', views.perfil, name='perfil'),
     path('catalogo/', views.catalogo, name='catalogo'),
+    path('logout/', views.logout_perfil, name='logout'),
 
 ]
 

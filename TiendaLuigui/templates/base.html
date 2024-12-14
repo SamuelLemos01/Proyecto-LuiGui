@@ -38,11 +38,14 @@
         </ul>
 
         <div class="nav-iconos">
-            <a href="{% url 'login' %}"><i class="ri-user-line"></i></a>
-            <a href="#"><i class="ri-logout-box-line"></i></a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'perfil' %}"><i class="ri-user-line"></i></a>
+                <a href="{% url 'logout' %}"><i class="ri-logout-box-line"></i></a>
+            {% else %}
+                <a href="{% url 'login' %}"><i class="ri-user-line"></i></a>
+            {% endif %}
             <a href="#"><i class="ri-shopping-cart-line"></i></a>
             <div class="bx bx-menu" id="menu-icon"></div>
-        </div>
     </header>
 
     {% block content %}
