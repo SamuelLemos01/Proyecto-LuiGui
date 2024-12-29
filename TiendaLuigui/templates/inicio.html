@@ -85,6 +85,16 @@
 
     <section class="contenedor-contacto" id="contactanos" data-aos="fade-up">
         <h2>Contactanos</h2>
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-{{ message.tags }}{% endif %}">
+                <p>{{ message }}</p>
+                <button class="alert-close">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="contacto">
             <div class="contact-info">
                 <h3 class="titulo-con">Habla con nosotros</h3>
@@ -110,27 +120,20 @@
             </div>
 
             <div class="contact-form">
-                <form action="" class="datos" autocomplete="off">
+                <form action="{% url 'contact' %}" method="POST" class="datos" autocomplete="off">
+                    {% csrf_token %}
                     <h3 class="titulo-con">Datos basicos</h3>
                     <div class="input-contenedor-contacto">
-                        <input type="text" name="name" class="input" />
-                        <label for="">Nombre</label>
-                        <span>Tu nombre:</span>
+                        <input type="text" name="nombre" class="input" placeholder="Tu nombre:" required/>
                     </div>
                     <div class="input-contenedor-contacto">
-                        <input type="email" name="email" class="input" />
-                        <label for="">Correo</label>
-                        <span>Tu correo:</span>
+                        <input type="email" name="email" class="input" placeholder="Tu Correo:"  required/>
                     </div>
                     <div class="input-contenedor-contacto">
-                        <input type="tel" name="phone" class="input" />
-                        <label for="">Teléfono</label>
-                        <span>Tu telefono:</span>
+                        <input type="tel" name="telefono" class="input" placeholder="Tu teléfono:"  required/>
                     </div>
                     <div class="input-contenedor-contacto textarea">
-                        <textarea name="message" class="input"></textarea>
-                        <label for="">Mensaje</label>
-                        <span>Deja tu mensaje</span>
+                        <textarea name="mensaje" class="input" placeholder="Deja tu mensaje:"  required></textarea>
                     </div>
                     <input type="submit" value="Enviar comentario" class="boton-contacto" />
                 </form>

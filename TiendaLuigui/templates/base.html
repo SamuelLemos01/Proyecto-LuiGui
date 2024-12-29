@@ -30,11 +30,16 @@
 
             <a href="{% url 'inicio' %}"><img src="{% static 'images/logo.png' %}" class="logo-responsive"></a>
             <div class="cerrar-icono"><i class="ri-close-line"></i></div>
-
-            <li><a href="{% url 'inicio' %}">Inicio</a></li>
-            <li><a href="{% url 'catalogo' %}">Catalogo</a></li>
-            <li><a href="{% url 'galeria' %}">Galeria</a></li>
-            <li><a href="#">Historial</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'catalogo' %}">Catalogo</a></li>
+                <li><a href="{% url 'galeria' %}">Galeria</a></li>
+                <li><a href="#">Historial</a></li>
+            {% else %}
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'catalogo' %}">Catalogo</a></li>
+                <li><a href="{% url 'galeria' %}">Galeria</a></li>
+            {% endif %}
         </ul>
 
         <div class="nav-iconos">

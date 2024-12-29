@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from TiendaLuigui import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.inicio,name='inicio'),
@@ -26,7 +29,10 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfil'),
     path('catalogo/', views.catalogo, name='catalogo'),
     path('logout/', views.logout_perfil, name='logout'),
+    path('api/productos/', views.get_products, name='get_products'),
+    path('contact/', views.contact, name='contact'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-]
+
 
 

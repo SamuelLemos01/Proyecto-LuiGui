@@ -310,25 +310,6 @@ textarea.input {
     resize: none;
 }
 
-.input-contenedor-contacto label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    padding: 0 0.4rem;
-    color: #fafafa;
-    font-size: 0.9rem;
-    font-weight: 400;
-    pointer-events: none;
-    z-index: 1000;
-    transition: 0.5s;
-}
-
-.input-contenedor-contacto.textarea label {
-    top: 1rem;
-    transform: translateY(0);
-}
-
 .boton-contacto {
     padding: 0.6rem 1.3rem;
     background-color: #fff;
@@ -346,52 +327,6 @@ textarea.input {
 .boton-contacto:hover {
     background-color: transparent;
     color: #fff;
-}
-
-.input-contenedor-contacto span {
-    position: absolute;
-    top: 0;
-    left: 25px;
-    transform: translateY(-50%);
-    font-size: 0.8rem;
-    padding: 0 0.4rem;
-    color: transparent;
-    pointer-events: none;
-    z-index: 500;
-}
-
-.input-contenedor-contacto span:before,
-.input-contenedor-contacto span:after {
-    content: "";
-    position: absolute;
-    width: 10%;
-    opacity: 0;
-    transition: 0.3s;
-    height: 5px;
-    background-color: #1abc9c;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.input-contenedor-contacto span:before {
-    left: 50%;
-}
-
-.input-contenedor-contacto span:after {
-    right: 50%;
-}
-
-.input-contenedor-contacto.focus label {
-    top: 0;
-    transform: translateY(-50%);
-    left: 25px;
-    font-size: 0.8rem;
-}
-
-.input-contenedor-contacto.focus span:before,
-.input-contenedor-contacto.focus span:after {
-    width: 50%;
-    opacity: 1;
 }
 
 .contact-info {
@@ -417,7 +352,50 @@ textarea.input {
     gap: 15px;
 }
 
+.messages-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
 
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.alert p {
+    margin: 0;
+    color: #fff;
+}
+
+.alert-success {
+    background-color: #1abc9c;
+}
+
+.alert-error {
+    background-color: #e74c3c;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.input::placeholder {
+    color: aliceblue;
+}
 
 /* Responsive */
 @media(max-width: 1610px) {
