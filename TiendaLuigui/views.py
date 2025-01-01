@@ -14,6 +14,9 @@ def perfil(request):
 def catalogo(request):
     return render(request, 'catalogo.html')
 
+def carrito(request):
+    return render(request, 'carrito.html')
+
 
 
 from django.shortcuts import render, redirect  
@@ -69,7 +72,7 @@ def perfil(request):  # Función para manejar el perfil del usuario
             password_form = PasswordChangeForm(request.user, request.POST)  # Crea instancia del formulario
             if password_form.is_valid():  # Valida los datos del formulario
                 user = password_form.save()  # Guarda la nueva contraseña
-                messages.success(request, '¡Contraseña actualizada exitosamente!')  # Muestra mensaje de éxito
+                messages.success(request, 'Contraseña actualizada exitosamente')  # Muestra mensaje de éxito
                 logout(request)  # Cierra la sesión del usuario
                 return redirect('login')  # Redirecciona al login
             else:  # Si hay errores en el formulario
@@ -119,3 +122,6 @@ def contact(request):  # Función para manejar el formulario de contacto
     else:  # Si el método es GET
         form = ContactForm()  # Crea formulario vacío
     return render(request, 'inicio.html', {'form': form})  # Renderiza la plantilla con el formulario
+
+from .models import Order
+

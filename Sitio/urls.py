@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout/', views.logout_perfil, name='logout'),
     path('api/productos/', views.get_products, name='get_products'),
     path('contact/', views.contact, name='contact'),
+    path('carrito/', views.carrito, name='carrito'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -1,159 +1,192 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
     const ITEMS_PER_PAGE = 12;
     let currentPage = 1;
-    let currentCategory = 'todos';
+    let currentCategory = "todos";
     let productos = [];
-    
-    // Función para obtener los productos de la API
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
     async function fetchProducts() {
         try {
-            const response = await fetch('/api/productos/');
+            const response = await fetch("/api/productos/");
             productos = await response.json();
             updateDisplay();
         } catch (error) {
-            console.error('Error al cargar productos:', error);
+            console.error("Error al cargar productos:", error);
         }
     }
-    
-    // Función para filtrar productos por categoría
+
     function filterProducts(category) {
-        return category === 'todos' 
-            ? productos 
-            : productos.filter(product => product.categoria === category);
+        return category === "todos" ? productos : productos.filter(p => p.categoria === category);
     }
-    
-    // Función para mostrar los productos en la página
+
     function displayProducts(products, page) {
         const start = (page - 1) * ITEMS_PER_PAGE;
-        const end = start + ITEMS_PER_PAGE;
-        const paginatedProducts = products.slice(start, end);
-        
-        const container = document.getElementById('productos-container');
-        container.innerHTML = '';
-        
+        const paginatedProducts = products.slice(start, start + ITEMS_PER_PAGE);
+        const container = document.getElementById("productos-container");
+        container.innerHTML = "";
+
         paginatedProducts.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.className = 'producto';
-            productElement.setAttribute('data-categoria', product.categoria);
-            
-            productElement.innerHTML = `
-                <img src="/media/${product.imagen}" alt="${product.nombre}">
-                <h2>${product.nombre}</h2>
-                <p>${product.descripcion}</p>
-                <div class="precio">
-                    <p>$${product.precio}</p>
-                    <button class="btn-comprar btn btn-primary" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#productModal"
-                        data-id="${product.id}"
-                        data-title="${product.nombre}"
-                        data-description="${product.descripcion}"
-                        data-price="${product.precio}"
-                        data-image="/media/${product.imagen}">
-                        Comprar
-                    </button>
+            container.innerHTML += `
+                <div class="producto" data-categoria="${product.categoria}">
+                    <img src="/media/${product.imagen}" alt="${product.nombre}">
+                    <h2>${product.nombre}</h2>
+                    <p>${product.descripcion}</p>
+                    <div class="precio">
+                        <p>$${product.precio}</p>
+                        <button class="btn-comprar btn btn-primary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#productModal"
+                            data-id="${product.id}"
+                            data-title="${product.nombre}"
+                            data-description="${product.descripcion}"
+                            data-price="${product.precio}"
+                            data-image="/media/${product.imagen}">
+                            Comprar
+                        </button>
+                    </div>
                 </div>
             `;
-            
-            container.appendChild(productElement);
         });
     }
-    
-    // Función para actualizar la paginación
-    function updatePagination(filteredProducts) {
-        const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-        const pagination = document.getElementById('pagination');
-        pagination.innerHTML = '';
-        
-        const prevLi = document.createElement('li');
-        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        prevLi.innerHTML = `
-            <button class="page-link" ${currentPage === 1 ? 'disabled' : ''}>Anterior</button>
+
+    function updatePagination(products) {
+        const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+        const paginationContainer = document.getElementById("pagination");
+        paginationContainer.innerHTML = "";
+
+        // Botón "Anterior"
+        const prevButton = document.createElement("li");
+        prevButton.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+        prevButton.innerHTML = `
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
         `;
-        pagination.appendChild(prevLi);
-        
+        prevButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentPage > 1) {
+                currentPage--;
+                updateDisplay();
+            }
+        });
+        paginationContainer.appendChild(prevButton);
+
+        // Números de página
         for (let i = 1; i <= totalPages; i++) {
-            const li = document.createElement('li');
-            li.className = `page-item ${currentPage === i ? 'active' : ''}`;
-            li.innerHTML = `
-                <button class="page-link">${i}</button>
-            `;
-            pagination.appendChild(li);
-        }
-        
-        const nextLi = document.createElement('li');
-        nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-        nextLi.innerHTML = `
-            <button class="page-link" ${currentPage === totalPages ? 'disabled' : ''}>Siguiente</button>
-        `;
-        pagination.appendChild(nextLi);
-        
-        document.querySelectorAll('.page-link').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const text = this.textContent;
-                if (text === 'Anterior' && currentPage > 1) {
-                    currentPage--;
-                } else if (text === 'Siguiente' && currentPage < totalPages) {
-                    currentPage++;
-                } else if (!isNaN(text)) {
-                    currentPage = parseInt(text);
-                }
+            const pageItem = document.createElement("li");
+            pageItem.className = `page-item ${currentPage === i ? 'active' : ''}`;
+            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = i;
                 updateDisplay();
             });
+            paginationContainer.appendChild(pageItem);
+        }
+
+        // Botón "Siguiente"
+        const nextButton = document.createElement("li");
+        nextButton.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextButton.innerHTML = `
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        `;
+        nextButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateDisplay();
+            }
         });
+        paginationContainer.appendChild(nextButton);
     }
-    
+
     function updateDisplay() {
         const filteredProducts = filterProducts(currentCategory);
         displayProducts(filteredProducts, currentPage);
         updatePagination(filteredProducts);
     }
-    
-    // Configuración del modal
-    const modal = document.getElementById('productModal');
-    const quantityInput = document.getElementById('quantity');
-    
-    modal.addEventListener('show.bs.modal', function(event) {
+
+    const modal = document.getElementById("productModal");
+    const quantityInput = document.getElementById("quantity");
+    const addToCartBtn = document.getElementById("addToCartBtn");
+
+    modal.addEventListener("show.bs.modal", function (event) {
         const button = event.relatedTarget;
-        const title = button.getAttribute('data-title');
-        const description = button.getAttribute('data-description');
-        const price = button.getAttribute('data-price');
-        const image = button.getAttribute('data-image');
-        
-        modal.querySelector('#productTitle').textContent = title;
-        modal.querySelector('#productDescription').textContent = description;
-        modal.querySelector('#productPrice').textContent = `$${price}`;
-        modal.querySelector('#productImage').src = image;
+        modal.querySelector("#productTitle").textContent = button.getAttribute("data-title");
+        modal.querySelector("#productDescription").textContent = button.getAttribute("data-description");
+        modal.querySelector("#productPrice").textContent = `$${button.getAttribute("data-price")}`;
+        modal.querySelector("#productImage").src = button.getAttribute("data-image");
+        modal.setAttribute("data-product-id", button.getAttribute("data-id"));
         quantityInput.value = 1;
     });
-    
-    // Eventos para los botones de cantidad
-    document.getElementById('decrementBtn').addEventListener('click', () => {
-        if (quantityInput.value > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
+
+    if (addToCartBtn) {  // Solo agregar el evento si el botón existe
+        addToCartBtn.addEventListener("click", function () {
+            const id = modal.getAttribute("data-product-id");
+            const cantidad = parseInt(quantityInput.value);
+            const producto = {
+                id: id,
+                nombre: modal.querySelector("#productTitle").textContent,
+                precio: parseFloat(modal.querySelector("#productPrice").textContent.replace("$", "")),
+                imagen: modal.querySelector("#productImage").src,
+                cantidad: cantidad
+            };
+
+            const existingProduct = carrito.find(p => p.id === id);
+            if (existingProduct) {
+                existingProduct.cantidad += cantidad;
+            } else {
+                carrito.push(producto);
+            }
+
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            
+            // Limpiar modal y backdrop correctamente
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+            
+            // Remover backdrop y restaurar scroll
+            setTimeout(() => {
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) backdrop.remove();
+                document.body.classList.remove('modal-open');
+                document.body.style.removeProperty('overflow');
+                document.body.style.removeProperty('padding-right');
+            }, 300);
+
+            // Mostrar alerta
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+            alert.style.zIndex = '9999';
+            alert.textContent = 'Producto agregado al carrito';
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 2000);
+        });
+    }
+
+    document.getElementById("decrementBtn").addEventListener("click", () => {
+        const currentVal = parseInt(quantityInput.value);
+        if (currentVal > 1) {
+            quantityInput.value = currentVal - 1;
         }
     });
-    
-    document.getElementById('incrementBtn').addEventListener('click', () => {
-        quantityInput.value = parseInt(quantityInput.value) + 1;
+
+    document.getElementById("incrementBtn").addEventListener("click", () => {
+        const currentVal = parseInt(quantityInput.value);
+        quantityInput.value = currentVal + 1;
     });
-    
-    // Configuración de filtros de categoría
-    document.querySelectorAll('.btn-verde').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.btn-verde').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            currentCategory = this.classList.contains('todos') ? 'todos' : 
-                            this.classList.contains('aseo') ? 'aseo' :
-                            this.classList.contains('comestibles') ? 'comestibles' :
-                            this.classList.contains('canastafamiliar') ? 'canastafamiliar' : 'papeleria';
-            
+
+    document.querySelectorAll(".btn-verde").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".btn-verde").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            currentCategory = this.className.match(/todos|aseo|comestibles|canastafamiliar|papeleria/)[0];
             currentPage = 1;
             updateDisplay();
         });
     });
-    
-    // Iniciar carga de productos
+
     fetchProducts();
 });

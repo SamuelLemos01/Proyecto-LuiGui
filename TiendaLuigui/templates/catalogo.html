@@ -46,16 +46,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <!-- Columna de la imagen -->
+                    <!--imagen -->
                     <div class="col-md-6">
                         <img src="" alt="Producto" class="img-fluid product-modal-image" id="productImage">
                     </div>
-                    <!-- Columna de detalles -->
+                    <!--detalles -->
                     <div class="col-md-6">
                         <h4 id="productTitle"></h4>
                         <p id="productDescription" class="mb-4"></p>
                         <p class="fw-bold" id="productPrice"></p>
-                        <!-- Selector de cantidad -->
+                        <!-- cantidad -->
                         <div class="quantity-selector mb-3">
                             <label for="quantity" class="form-label">Cantidad:</label>
                             <div class="input-group" style="width: 150px;">
@@ -64,9 +64,15 @@
                                 <button class="btn btn-outline-secondary" type="button" id="incrementBtn">+</button>
                             </div>
                         </div>
+                    {% if user.is_authenticated %}
                         <button type="button" class="btn btn-primary w-100 mb-2" id="addToCartBtn">
                             Agregar al carrito
                         </button>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-primary w-100 mb-2">
+                            Iniciar sesión para comprar
+                        </a>
+                    {% endif %}
                     </div>
                 </div>
             </div>

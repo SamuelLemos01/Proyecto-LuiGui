@@ -20,3 +20,8 @@ from .models import Contact
 class ContactMessages (admin.ModelAdmin):
     list_display = ('nombre', 'email', 'telefono', 'mensaje')
 admin.site.register(Contact, ContactMessages)
+
+from .models import Order
+class OrderPending(admin.ModelAdmin):
+    list_display = ('user', 'fechaCreado', 'total', 'domicilio')
+admin.site.register(Order, OrderPending)
